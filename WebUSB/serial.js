@@ -33,8 +33,7 @@ var serial = {};
           console.log(i + ": " + dataView.getInt8(i).toString(16));
         }
 
-        console.log("WebUSB - 🔴 Received 2 <<< " + arrayBufferToHexString(result.data.buffer));
-
+        console.log("WebUSB - 🔴 Received 1 <<< " + result.data.buffer);
         this.onReceive(result.data);
         readLoop();
       }, error => {
@@ -90,13 +89,7 @@ var serial = {};
     return result.toUpperCase();
   }
 
-  function arrayBufferToHexString(byteArray) {
-    var s = '0x';
-    byteArray.forEach(function(byte) {
-      s += ('0' + (byte & 0xFF).toString(16)).slice(-2);
-    });
-    return s;
-  }
+
 
 
 
