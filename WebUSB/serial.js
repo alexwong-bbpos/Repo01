@@ -63,7 +63,24 @@ var serial = {};
   };
 
   serial.Port.prototype.send = function(data) {
-    console.log("WebUSB - 🔵 Send >>> " + data);
+    console.log("WebUSB - 🔵 Send >>> " + intArrayToHexString(data));
     return this.device_.transferOut(4, data);
   };
+
+  function intArrayToHexString(arr) {
+    var result = "";
+    var z;
+
+    for (var i = 0; i < arr.length; i++) {
+      var str = arr[i].toString(16);
+
+      z = 2 - str.length + 1;
+      str = Array(z).join("0") + str;
+
+      result += str;
+    }
+    return result.toUpperCase();
+  }
+
+
 })();
