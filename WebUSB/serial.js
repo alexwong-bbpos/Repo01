@@ -27,7 +27,7 @@ var serial = {};
     let readLoop = () => {
       this.device_.transferIn(5, 64).then(result => {
         console.log("WebUSB - 🔴 Received <<< " + result.data.buffer);
-        console.log("WebUSB - 🔴 Received <<< " + intArrayToHexString(result.data.buffer));
+        console.log("WebUSB - 🔴 Received <<< " + arrayBufferToHexString(result.data.buffer));
         this.onReceive(result.data);
         readLoop();
       }, error => {
@@ -83,5 +83,8 @@ var serial = {};
     return result.toUpperCase();
   }
 
+  function arrayBufferToHexString(arrayBuffer) { // buffer is an ArrayBuffer
+    return Array.prototype.map.call(new Uint8Array(arrayBuffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+  }
 
 })();
