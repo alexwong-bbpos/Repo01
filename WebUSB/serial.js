@@ -33,11 +33,7 @@ var serial = {};
           console.log(i + ": " + dataView.getInt8(i).toString(16));
         }
 
-        var textDecoder = new TextDecoder('utf-8');
-        var str = textDecoder.decode(result.data);
-        console.log("WebUSB - 🔴 Received 1 <<< " + str);
-
-
+        console.log("WebUSB - 🔴 Received 2 <<< " + arrayBufferToHexString(result.data.buffer));
 
         this.onReceive(result.data);
         readLoop();
@@ -94,14 +90,15 @@ var serial = {};
     return result.toUpperCase();
   }
 
-  function asciiToHexString(str) {
-    var arr1 = [];
-    for (var n = 0, l = str.length; n < l; n ++){
-      var hex = Number(str.charCodeAt(n)).toString(16);
-      arr1.push(hex);
-    }
-    return arr1.join('');
+  function arrayBufferToHexString(byteArray) {
+    var s = '0x';
+    byteArray.forEach(function(byte) {
+      s += ('0' + (byte & 0xFF).toString(16)).slice(-2);
+    });
+    return s;
   }
+
+
 
 
 
