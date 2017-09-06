@@ -26,7 +26,7 @@ var serial = {};
   serial.Port.prototype.connect = function() {
     let readLoop = () => {
       this.device_.transferIn(5, 64).then(result => {
-        console.log("WebUSB - 🔴 Received <<< " + data);
+        console.log("WebUSB - 🔴 Received <<< " + result.data);
         this.onReceive(result.data);
         readLoop();
       }, error => {
