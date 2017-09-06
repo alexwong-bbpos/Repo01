@@ -28,7 +28,7 @@ var serial = {};
       this.device_.transferIn(5, 64).then(result => {
 
         var textDecoder = new TextDecoder('utf-8');
-        str = textDecoder.decode(result.data);
+        var str = textDecoder.decode(result.data);
         console.log("WebUSB - 🔴 Received 1 <<< " + str);
         console.log("WebUSB - 🔴 Received 2 <<< " + arrayBufferToHexString(result.data.buffer));
         this.onReceive(result.data);
