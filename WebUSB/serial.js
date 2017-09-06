@@ -26,7 +26,10 @@ var serial = {};
   serial.Port.prototype.connect = function() {
     let readLoop = () => {
       this.device_.transferIn(5, 64).then(result => {
-        console.log("WebUSB - 🔴 Received <<< " + arrayBufferToHexString(result.data.buffer));
+        var intArray = new Int32Array(result.data.buffer);
+
+        console.log("WebUSB - 🔴 Received 1 <<< " + intArrayToHexString(intArray));
+        console.log("WebUSB - 🔴 Received 2 <<< " + arrayBufferToHexString(result.data.buffer));
         this.onReceive(result.data);
         readLoop();
       }, error => {
@@ -92,7 +95,7 @@ var serial = {};
 
 
 
-  
+
 
 
 })();
