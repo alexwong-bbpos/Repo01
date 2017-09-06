@@ -27,10 +27,15 @@ var serial = {};
     let readLoop = () => {
       this.device_.transferIn(5, 64).then(result => {
 
+        var dataView = result.data;
+        console.log("dataView.byteLength: " + dataView.byteLength);
+        for (var i=0 ; i<dataView.byteLength ; i++ ){
+          console.log(i + ": " + dataView.getInt8(i).toString(16));
+        }
+
         var textDecoder = new TextDecoder('utf-8');
         var str = textDecoder.decode(result.data);
         console.log("WebUSB - 🔴 Received 1 <<< " + str);
-        console.log("WebUSB - 🔴 Received 2 <<< " + asciiToHexString(str));
 
 
 
